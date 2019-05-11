@@ -15,13 +15,14 @@ typeCount PerfectFour(int** board)
     {
         for(int j = 0; j < 15; j++)
         {
-            if( board[i    ][j] == 0                &&  
+            if( board[i    ][j] == 0                &&
+                board[i + 1][j] != 0                &&
                 board[i + 1][j] == board[i + 2][j]  &&  
                 board[i + 2][j] == board[i + 3][j]  &&
                 board[i + 3][j] == board[i + 4][j]  &&
                 board[i + 5][j] == 0  
                 )
-            {
+            {   // 011110
                 if(board[i + 1][j] == 1)    result.maxC++;
                 else                        result.minC++;
             }
@@ -32,7 +33,8 @@ typeCount PerfectFour(int** board)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i][j    ] == 0                &&  
+            if( board[i][j    ] == 0                &&
+                board[i][j + 1] != 0                &&
                 board[i][j + 1] == board[i][j + 2]  &&  
                 board[i][j + 2] == board[i][j + 3]  &&
                 board[i][j + 3] == board[i][j + 4]  &&
@@ -50,6 +52,7 @@ typeCount PerfectFour(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] != 0                    && 
                 board[i + 1][j + 1] == board[i + 2][j + 2]  &&  
                 board[i + 2][j + 2] == board[i + 3][j + 3]  &&
                 board[i + 3][j + 3] == board[i + 4][j + 4]  &&
@@ -66,7 +69,8 @@ typeCount PerfectFour(int** board)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
+            if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] != 0                    && 
                 board[i - 1][j + 1] == board[i - 2][j + 2]  &&  
                 board[i - 2][j + 2] == board[i - 3][j + 3]  &&
                 board[i - 3][j + 3] == board[i - 4][j + 4]  &&
@@ -93,6 +97,7 @@ typeCount ThreatFour(int** board)
         for(int j = 0; j < 15; j++)
         {
             if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] != 0                    &&  
                 board[i + 1][j] == board[i + 2][j]      &&  
                 board[i + 2][j] == board[i + 3][j]      &&
                 board[i + 3][j] == board[i + 4][j]      &&
@@ -103,6 +108,7 @@ typeCount ThreatFour(int** board)
                 else                        result.minC++;
             }
             if( board[i    ][j] == (-1)*board[i + 1][j] &&  
+                board[i + 1][j] != 0                    &&  
                 board[i + 1][j] == board[i + 2][j]      &&  
                 board[i + 2][j] == board[i + 3][j]      &&
                 board[i + 3][j] == board[i + 4][j]      &&
@@ -118,7 +124,8 @@ typeCount ThreatFour(int** board)
     {
         for(int j = 0; j < 15; j++)
         {
-            if( board[i    ][j] == board[i + 2][j]      &&  
+            if( board[i    ][j] != 0                    &&  
+                board[i    ][j] == board[i + 2][j]      &&  
                 board[i + 1][j] == 0                    &&
                 board[i + 2][j] == board[i + 3][j]      &&  
                 board[i + 3][j] == board[i + 4][j]      
@@ -127,7 +134,8 @@ typeCount ThreatFour(int** board)
                 if(board[i + 2][j] == 1)    result.maxC++;
                 else                        result.minC++;
             }
-            if( board[i    ][j] == board[i + 1][j]      &&  
+            if( board[i    ][j] != 0                    &&
+                board[i    ][j] == board[i + 1][j]      &&  
                 board[i + 1][j] == board[i + 3][j]      &&  
                 board[i + 2][j] == 0                    &&
                 board[i + 3][j] == board[i + 4][j]     
@@ -136,7 +144,8 @@ typeCount ThreatFour(int** board)
                 if(board[i + 1][j] == 1)    result.maxC++;
                 else                        result.minC++;
             }
-            if( board[i    ][j] == board[i + 1][j]      &&  
+            if( board[i    ][j] != 0                    &&
+                board[i    ][j] == board[i + 1][j]      &&  
                 board[i + 1][j] == board[i + 2][j]      &&  
                 board[i + 2][j] == board[i + 4][j]      &&
                 board[i + 3][j] == 0      
@@ -153,6 +162,7 @@ typeCount ThreatFour(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] != 0                    &&  
                 board[i][j + 1] == board[i][j + 2]      &&  
                 board[i][j + 2] == board[i][j + 3]      &&
                 board[i][j + 3] == board[i][j + 4]      &&
@@ -163,6 +173,7 @@ typeCount ThreatFour(int** board)
                 else                        result.minC++;
             }
             if( board[i][j    ] == (-1)*board[i][j + 1] &&  
+                board[i][j + 1] != 0                    &&  
                 board[i][j + 1] == board[i][j + 2]      &&  
                 board[i][j + 2] == board[i][j + 3]      &&
                 board[i][j + 3] == board[i][j + 4]      &&
@@ -178,7 +189,8 @@ typeCount ThreatFour(int** board)
     {
         for(int j = 0; j < 11; j++)
         {
-            if( board[i][j    ] == board[i][j + 2]      &&  
+            if( board[i][j    ] != 0                    &&  
+                board[i][j    ] == board[i][j + 2]      &&  
                 board[i][j + 1] == 0                    &&
                 board[i][j + 2] == board[i][j + 3]      &&  
                 board[i][j + 3] == board[i][j + 4]      
@@ -187,7 +199,8 @@ typeCount ThreatFour(int** board)
                 if(board[i][j + 2] == 1)    result.maxC++;
                 else                        result.minC++;
             }
-            if( board[i][j    ] == board[i][j + 1]      &&  
+            if( board[i][j    ] == board[i][j + 1]      &&
+                board[i][j + 1] != 0                    &&  
                 board[i][j + 1] == board[i][j + 3]      &&  
                 board[i][j + 2] == 0                    &&
                 board[i][j + 3] == board[i][j + 4]     
@@ -197,6 +210,7 @@ typeCount ThreatFour(int** board)
                 else                        result.minC++;
             }
             if( board[i][j    ] == board[i][j + 1]      &&  
+                board[i][j + 1] != 0                    &&  
                 board[i][j + 1] == board[i][j + 2]      &&  
                 board[i][j + 2] == board[i][j + 4]      &&
                 board[i][j + 3] == 0      
@@ -213,6 +227,7 @@ typeCount ThreatFour(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i    ][j    ] == 0                        &&  
+                board[i + 1][j + 1] != 0                        &&  
                 board[i + 1][j + 1] == board[i + 2][j + 2]      &&  
                 board[i + 2][j + 2] == board[i + 3][j + 3]      &&
                 board[i + 3][j + 3] == board[i + 4][j + 4]      &&
@@ -223,6 +238,7 @@ typeCount ThreatFour(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == (-1)*board[i + 1][j + 1] &&  
+                board[i + 1][j + 1] != 0                        &&  
                 board[i + 1][j + 1] == board[i + 2][j + 2]      &&  
                 board[i + 2][j + 2] == board[i + 3][j + 3]      &&
                 board[i + 3][j + 3] == board[i + 4][j + 4]      &&
@@ -238,7 +254,8 @@ typeCount ThreatFour(int** board)
     {
         for(int j = 0; j < 11; j++)
         {
-            if( board[i    ][j    ] == board[i + 2][j + 2]      &&  
+            if( board[i    ][j    ] == board[i + 2][j + 2]      && 
+                board[i    ][j    ] != 0                        && 
                 board[i + 1][j + 1] == 0                        &&
                 board[i + 2][j + 2] == board[i + 3][j + 3]      &&  
                 board[i + 3][j + 3] == board[i + 4][j + 4]      
@@ -247,8 +264,9 @@ typeCount ThreatFour(int** board)
                 if(board[i + 2][j + 2] == 1)    result.maxC++;
                 else                            result.minC++;
             }
-            if( board[i    ][j    ] == board[i + 1][j + 1]      &&  
-                board[i + 1][j + 1] == board[i + 3][j + 3]      &&  
+            if( board[i    ][j    ] == board[i + 1][j + 1]      && 
+                board[i + 1][j + 1] != 0                        && 
+                board[i + 1][j + 1] == board[i + 3][j + 3]      && 
                 board[i + 2][j + 2] == 0                        &&
                 board[i + 3][j + 3] == board[i + 4][j + 4]     
                 )
@@ -257,7 +275,8 @@ typeCount ThreatFour(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == board[i + 1][j + 1]      &&  
-                board[i + 1][j + 1] == board[i + 2][j + 2]      &&  
+                board[i + 1][j + 1] != 0                        && 
+                board[i + 1][j + 1] == board[i + 2][j + 2]      && 
                 board[i + 2][j + 2] == board[i + 4][j + 4]      &&
                 board[i + 3][j + 3] == 0      
                 )
@@ -273,6 +292,7 @@ typeCount ThreatFour(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i    ][j    ] == 0                        &&  
+                board[i - 1][j + 1] != 0                        &&  
                 board[i - 1][j + 1] == board[i - 2][j + 2]      &&  
                 board[i - 2][j + 2] == board[i - 3][j + 3]      &&
                 board[i - 3][j + 3] == board[i - 4][j + 4]      &&
@@ -283,12 +303,13 @@ typeCount ThreatFour(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == (-1)*board[i - 1][j + 1] &&  
+                board[i - 1][j + 1] != 0                        &&  
                 board[i - 1][j + 1] == board[i - 2][j + 2]      &&  
                 board[i - 2][j + 2] == board[i - 3][j + 3]      &&
                 board[i - 3][j + 3] == board[i - 4][j + 4]      &&
                 board[i - 5][j + 5] == 0 
                 )
-            {   // 2111110
+            {   // 211110
                 if(board[i - 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
             }
@@ -299,6 +320,7 @@ typeCount ThreatFour(int** board)
         for(int j = 0; j < 11; j++)
         {
             if( board[i    ][j    ] == board[i - 2][j + 2]      &&  
+                board[i    ][j    ] != 0                        &&  
                 board[i - 1][j + 1] == 0                        &&
                 board[i - 2][j + 2] == board[i - 3][j + 3]      &&  
                 board[i - 3][j + 3] == board[i - 4][j + 4]      
@@ -308,6 +330,7 @@ typeCount ThreatFour(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == board[i - 1][j + 1]      &&  
+                board[i - 1][j + 1] != 0                        &&  
                 board[i - 1][j + 1] == board[i - 3][j + 3]      &&  
                 board[i - 2][j + 2] == 0                        &&
                 board[i - 3][j + 3] == board[i - 4][j + 4]     
@@ -317,6 +340,7 @@ typeCount ThreatFour(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == board[i - 1][j + 1]      &&  
+                board[i - 1][j + 1] != 0                        &&  
                 board[i - 1][j + 1] == board[i - 2][j + 2]      &&  
                 board[i - 2][j + 2] == board[i - 4][j + 4]      &&
                 board[i - 3][j + 3] == 0      
@@ -342,6 +366,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 15; j++)
         {
             if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] != 0                    &&  
                 board[i + 1][j] == board[i + 3][j]      &&  
                 board[i + 2][j] == 0                    &&
                 board[i + 3][j] == board[i + 4][j]      &&
@@ -352,6 +377,7 @@ typeCount ThreatThree(int** board)
                 else                        result.minC++;
             }
             if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] != 0                    &&  
                 board[i + 1][j] == board[i + 2][j]      &&  
                 board[i + 2][j] == board[i + 4][j]      &&
                 board[i + 3][j] == 0                    &&
@@ -368,6 +394,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 15; j++)
         {
             if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] != 0                    &&
                 board[i + 1][j] == board[i + 2][j]      &&
                 board[i + 2][j] == board[i + 3][j]      &&  
                 board[i + 4][j] == 0      
@@ -384,6 +411,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] != 0                    &&  
                 board[i][j + 1] == board[i][j + 3]      &&  
                 board[i][j + 2] == 0                    &&
                 board[i][j + 3] == board[i][j + 4]      &&
@@ -394,6 +422,7 @@ typeCount ThreatThree(int** board)
                 else                        result.minC++;
             }
             if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] != 0                    &&  
                 board[i][j + 1] == board[i][j + 2]      &&  
                 board[i][j + 2] == board[i][j + 4]      &&
                 board[i][j + 3] == 0                    &&
@@ -410,6 +439,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 11; j++)
         {
             if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] != 0                    &&
                 board[i][j + 1] == board[i][j + 2]      &&
                 board[i][j + 2] == board[i][j + 3]      &&  
                 board[i][j + 4] == 0      
@@ -426,6 +456,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] != 0                    &&  
                 board[i + 1][j + 1] == board[i + 3][j + 3]  &&  
                 board[i + 2][j + 2] == 0                    &&
                 board[i + 3][j + 3] == board[i + 4][j + 4]  &&
@@ -436,6 +467,7 @@ typeCount ThreatThree(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] != 0                    &&  
                 board[i + 1][j + 1] == board[i + 2][j + 2]  &&  
                 board[i + 2][j + 2] == board[i + 4][j + 4]  &&
                 board[i + 3][j + 3] == 0                    &&
@@ -452,6 +484,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 11; j++)
         {
             if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] != 0                    &&
                 board[i + 1][j + 1] == board[i + 2][j + 2]  &&
                 board[i + 2][j + 2] == board[i + 3][j + 3]  &&  
                 board[i + 4][j + 4] == 0      
@@ -468,6 +501,7 @@ typeCount ThreatThree(int** board)
         for(int j = 0; j < 10; j++)
         {
             if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] != 0                    &&  
                 board[i - 1][j + 1] == board[i - 3][j + 3]  &&  
                 board[i - 2][j + 2] == 0                    &&
                 board[i - 3][j + 3] == board[i - 4][j + 4]  &&
@@ -478,6 +512,7 @@ typeCount ThreatThree(int** board)
                 else                            result.minC++;
             }
             if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] != 0                    &&  
                 board[i - 1][j + 1] == board[i - 2][j + 2]  &&  
                 board[i - 2][j + 2] == board[i - 4][j + 4]  &&
                 board[i - 3][j + 3] == 0                    &&
@@ -489,11 +524,12 @@ typeCount ThreatThree(int** board)
             }
         }
     }
-    for(int i = 0; i < 11; i++)
+    for(int i = 4; i < 15; i++)
     {
         for(int j = 0; j < 11; j++)
         {
             if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] != 0                    &&
                 board[i - 1][j + 1] == board[i - 2][j + 2]  &&
                 board[i - 2][j + 2] == board[i - 3][j + 3]  &&  
                 board[i - 4][j + 4] == 0      
@@ -514,17 +550,127 @@ typeCount TryThree(int** board)
     typeCount result;
     result.maxC = result.minC = 0;
     // UP-DOWN----------------------------------------------------
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 15; j++)
+        {
+            if( board[i    ][j] == (-1)*board[i + 2][j] &&  
+                board[i + 1][j] == 0                    &&  
+                board[i + 2][j] != 0                    &&
+                board[i + 2][j] == board[i + 3][j]      &&
+                board[i + 3][j] == board[i + 4][j]      &&
+                board[i + 5][j] == 0                    &&
+                board[i + 6][j] == (-1)*board[i + 2][j] 
+                )
+            {   // 2011102
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
     for(int i = 0; i < 10; i++)
     {
         for(int j = 0; j < 15; j++)
         {
-            if( board[i    ][j] == 0  &&  
-                board[i + 5][j] == 0  &&
-                board[i + 1][j] == board[i + 2][j]  &&  
-                board[i + 2][j] == board[i + 3][j]  &&
-                board[i + 3][j] == board[i + 4][j]  &&
+            if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] == 0                    &&  
+                board[i + 2][j] != 0                    &&
+                board[i + 2][j] == board[i + 3][j]      &&
+                board[i + 3][j] == board[i + 4][j]      &&
+                board[i + 5][j] == (-1)*board[i + 2][j]
                 )
-            {
+            {   // 001112
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == (-1)*board[i + 2][j] &&  
+                board[i + 1][j] != 0                    &&  
+                board[i + 1][j] == board[i + 2][j]      &&  
+                board[i + 2][j] == board[i + 3][j]      &&
+                board[i + 4][j] == 0                    &&
+                board[i + 5][j] == 0
+                )
+            {   // 211100
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] != 0                    &&  
+                board[i + 1][j] == board[i + 3][j]      &&  
+                board[i + 2][j] == 0                    &&
+                board[i + 3][j] == board[i + 4][j]      &&
+                board[i + 5][j] == (-1)*board[i + 1][j]
+                )
+            {   // 010112
+                if(board[i + 1][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == 0                    &&  
+                board[i + 1][j] != 0                    &&  
+                board[i + 1][j] == board[i + 2][j]      &&  
+                board[i + 2][j] == board[i + 4][j]      &&
+                board[i + 3][j] == 0                    &&
+                board[i + 5][j] == (-1)*board[i + 2][j]
+                )
+            {   // 011012
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == (-1)*board[i + 1][j] &&  
+                board[i + 1][j] != 0                    &&  
+                board[i + 1][j] == board[i + 3][j]      &&  
+                board[i + 2][j] == 0                    &&
+                board[i + 3][j] == board[i + 4][j]      &&
+                board[i + 5][j] == 0
+                )
+            {   // 210110
+                if(board[i + 1][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == (-1)*board[i + 2][j] &&  
+                board[i + 1][j] != 0                    &&  
+                board[i + 1][j] == board[i + 2][j]      &&  
+                board[i + 2][j] == board[i + 4][j]      &&
+                board[i + 3][j] == 0                    &&
+                board[i + 5][j] == 0
+                )
+            {   // 211010
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 11; i++)
+    {
+        for(int j = 0; j < 15; j++)
+        {
+            if( board[i    ][j] == board[i + 3][j]      &&  
+                board[i    ][j] != 0                    &&  
+                board[i + 1][j] == 0                    &&
+                board[i + 2][j] == 0                    &&  
+                board[i + 3][j] == board[i + 4][j]
+                )
+            {   // 10011
+                if(board[i    ][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == board[i + 2][j]      &&  
+                board[i    ][j] != 0                    &&  
+                board[i + 1][j] == 0                    &&
+                board[i + 2][j] == board[i + 4][j]      &&  
+                board[i + 3][j] == 0      
+                )
+            {   // 10101
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == board[i + 1][j]      &&  
+                board[i + 1][j] != board[i + 4][j]      &&
+                board[i + 1][j] == board[i + 4][j]      &&
+                board[i + 2][j] == 0                    &&  
+                board[i + 3][j] == 0      
+                )
+            {   // 11001
                 if(board[i + 1][j] == 1)    result.maxC++;
                 else                        result.minC++;
             }
@@ -533,49 +679,379 @@ typeCount TryThree(int** board)
     // RIGHT-LEFT----------------------------------------------------
     for(int i = 0; i < 15; i++)
     {
+        for(int j = 0; j < 9; j++)
+        {
+            if( board[i][j    ] == (-1)*board[i][j + 2] &&  
+                board[i][j + 1] == 0                    &&  
+                board[i][j + 2] != 0                    &&
+                board[i][j + 2] == board[i][j + 3]      &&
+                board[i][j + 3] == board[i][j + 4]      &&
+                board[i][j + 5] == 0                    &&
+                board[i][j + 6] == (-1)*board[i][j + 2] 
+                )
+            {   // 2011102
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 15; i++)
+    {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i][j    ] == 0  &&  
-                board[i][j + 5] == 0  &&
-                board[i][j + 1] == board[i][j + 2]  &&  
-                board[i][j + 2] == board[i][j + 3]  &&
-                board[i][j + 3] == board[i][j + 4]  &&
+            if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] == 0                    &&  
+                board[i][j + 2] != 0                    &&
+                board[i][j + 2] == board[i][j + 3]      &&
+                board[i][j + 3] == board[i][j + 4]      &&
+                board[i][j + 5] == (-1)*board[i][j + 2]
                 )
-            {
+            {   // 001112
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == (-1)*board[i][j + 2] &&  
+                board[i][j + 1] != 0                    &&  
+                board[i][j + 1] == board[i][j + 2]      &&  
+                board[i][j + 2] == board[i][j + 3]      &&
+                board[i][j + 4] == 0                    &&
+                board[i][j + 5] == 0
+                )
+            {   // 211100
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] != 0                    &&  
+                board[i][j + 1] == board[i][j + 3]      &&  
+                board[i][j + 2] == 0                    &&
+                board[i][j + 3] == board[i][j + 4]      &&
+                board[i][j + 5] == (-1)*board[i][j + 1]
+                )
+            {   // 010112
+                if(board[i][j + 1] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == 0                    &&  
+                board[i][j + 1] != 0                    &&  
+                board[i][j + 1] == board[i][j + 2]      &&  
+                board[i][j + 2] == board[i][j + 4]      &&
+                board[i][j + 3] == 0                    &&
+                board[i][j + 5] == (-1)*board[i][j + 2]
+                )
+            {   // 011012
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == (-1)*board[i][j + 1] &&  
+                board[i][j + 1] != 0                    &&  
+                board[i][j + 1] == board[i][j + 3]      &&  
+                board[i][j + 2] == 0                    &&
+                board[i][j + 3] == board[i][j + 4]      &&
+                board[i][j + 5] == 0
+                )
+            {   // 210110
+                if(board[i][j + 1] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == (-1)*board[i][j + 2] &&  
+                board[i][j + 1] != 0                    &&  
+                board[i][j + 1] == board[i][j + 2]      &&  
+                board[i][j + 2] == board[i][j + 4]      &&
+                board[i][j + 3] == 0                    &&
+                board[i][j + 5] == 0
+                )
+            {   // 211010
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 15; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i][j    ] == board[i][j + 3]      &&  
+                board[i][j    ] != 0                    &&  
+                board[i][j + 1] == 0                    &&
+                board[i][j + 2] == 0                    &&  
+                board[i][j + 3] == board[i][j + 4]
+                )
+            {   // 10011
+                if(board[i    ][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == board[i][j + 2]      &&  
+                board[i][j    ] != 0                    &&  
+                board[i][j + 1] == 0                    &&
+                board[i][j + 2] == board[i][j + 4]      &&  
+                board[i][j + 3] == 0      
+                )
+            {   // 10101
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == board[i][j + 1]      &&  
+                board[i][j + 1] != 0                    &&
+                board[i][j + 1] == board[i][j + 4]      &&
+                board[i][j + 2] == 0                    &&  
+                board[i][j + 3] == 0      
+                )
+            {   // 11001
                 if(board[i][j + 1] == 1)    result.maxC++;
                 else                        result.minC++;
             }
         }
     }
     // UL-DR----------------------------------------------------
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if( board[i    ][j    ] == (-1)*board[i + 2][j + 2] &&  
+                board[i + 1][j + 1] == 0                        &&  
+                board[i + 2][j + 2] != 0                        &&
+                board[i + 2][j + 2] == board[i + 3][j + 3]      &&
+                board[i + 3][j + 3] == board[i + 4][j + 4]      &&
+                board[i + 5][j + 5] == 0                        &&
+                board[i + 6][j + 6] == (-1)*board[i + 2][j + 2] 
+                )
+            {   // 2011102
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
     for(int i = 0; i < 10; i++)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
-                board[i + 5][j + 5] == 0  &&
-                board[i + 1][j + 1] == board[i + 2][j + 2]  &&  
-                board[i + 2][j + 2] == board[i + 3][j + 3]  &&
-                board[i + 3][j + 3] == board[i + 4][j + 4]  &&
+            if( board[i    ][j    ] == 0                        &&  
+                board[i + 1][j + 1] == 0                        &&  
+                board[i + 2][j + 2] != 0                        &&
+                board[i + 2][j + 2] == board[i + 3][j + 3]      &&
+                board[i + 3][j + 3] == board[i + 4][j + 4]      &&
+                board[i + 5][j + 5] == (-1)*board[i + 2][j + 2]
                 )
-            {
+            {   // 001112
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == (-1)*board[i + 2][j + 2] &&  
+                board[i + 1][j + 1] != 0                        &&  
+                board[i + 1][j + 1] == board[i + 2][j + 2]      &&  
+                board[i + 2][j + 2] == board[i + 3][j + 3]      &&
+                board[i + 4][j + 4] == 0                        &&
+                board[i + 5][j + 2] == 0
+                )
+            {   // 211100
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                        &&  
+                board[i + 1][j + 1] != 0                        &&  
+                board[i + 1][j + 1] == board[i + 3][j + 3]      &&  
+                board[i + 2][j + 2] == 0                        &&
+                board[i + 3][j + 3] == board[i + 4][j + 4]      &&
+                board[i + 5][j + 5] == (-1)*board[i + 1][j + 1]
+                )
+            {   // 010112
+                if(board[i + 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                        &&  
+                board[i + 1][j + 1] != 0                        &&  
+                board[i + 1][j + 1] == board[i + 2][j + 2]      &&  
+                board[i + 2][j + 2] == board[i + 4][j + 4]      &&
+                board[i + 3][j + 3] == 0                        &&
+                board[i + 5][j + 5] == (-1)*board[i + 2][j + 2]
+                )
+            {   // 011012
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == (-1)*board[i + 1][j + 1] &&  
+                board[i + 1][j + 1] != 0                        &&  
+                board[i + 1][j + 1] == board[i + 3][j + 3]      &&  
+                board[i + 2][j + 2] == 0                        &&
+                board[i + 3][j + 3] == board[i + 4][j + 4]      &&
+                board[i + 5][j + 5] == 0
+                )
+            {   // 210110
+                if(board[i + 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == (-1)*board[i + 2][j + 2] &&  
+                board[i + 1][j + 1] != 0                        &&  
+                board[i + 1][j + 1] == board[i + 2][j + 2]      &&  
+                board[i + 2][j + 2] == board[i + 4][j + 4]      &&
+                board[i + 3][j + 3] == 0                        &&
+                board[i + 5][j + 5] == 0
+                )
+            {   // 211010
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 11; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i    ][j    ] == board[i + 3][j + 3]  &&  
+                board[i    ][j    ] != 0                    &&  
+                board[i + 1][j + 1] == 0                    &&
+                board[i + 2][j + 2] == 0                    &&  
+                board[i + 3][j + 3] == board[i + 4][j + 4]
+                )
+            {   // 10011
+                if(board[i    ][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j    ] == board[i + 2][j + 2]  &&  
+                board[i    ][j    ] != 0                    &&  
+                board[i + 1][j + 1] == 0                    &&
+                board[i + 2][j + 2] == board[i + 4][j + 4]  &&  
+                board[i + 3][j + 3] == 0      
+                )
+            {   // 10101
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == board[i + 1][j + 1]  &&  
+                board[i + 1][j + 1] != 0                    &&
+                board[i + 1][j + 1] == board[i + 4][j + 4]  &&
+                board[i + 2][j + 2] == 0                    &&  
+                board[i + 3][j + 3] == 0      
+                )
+            {   // 11001
                 if(board[i + 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
             }
         }
     }
     // UR-DL----------------------------------------------------
+    for(int i = 6; i < 15; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if( board[i    ][j    ] == (-1)*board[i - 2][j + 2] &&  
+                board[i - 1][j + 1] == 0                        &&  
+                board[i - 2][j + 2] != 0                        &&
+                board[i - 2][j + 2] == board[i - 3][j + 3]      &&
+                board[i - 3][j + 3] == board[i - 4][j + 4]      &&
+                board[i - 5][j + 5] == 0                        &&
+                board[i - 6][j + 6] == (-1)*board[i - 2][j + 2] 
+                )
+            {   // 2011102
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
     for(int i = 5; i < 15; i++)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
-                board[i - 5][j + 5] == 0  &&
-                board[i - 1][j + 1] == board[i - 2][j + 2]  &&  
-                board[i - 2][j + 2] == board[i - 3][j + 3]  &&
-                board[i - 3][j + 3] == board[i - 4][j + 4]  &&
+            if( board[i    ][j    ] == 0                        &&  
+                board[i - 1][j + 1] == 0                        &&  
+                board[i - 2][j + 2] != 0                        &&
+                board[i - 2][j + 2] == board[i - 3][j + 3]      &&
+                board[i - 3][j + 3] == board[i - 4][j + 4]      &&
+                board[i - 5][j + 5] == (-1)*board[i - 2][j + 2]
                 )
-            {
+            {   // 001112
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == (-1)*board[i - 2][j + 2] &&  
+                board[i - 1][j + 1] != 0                        &&  
+                board[i - 1][j + 1] == board[i - 2][j + 2]      &&  
+                board[i - 2][j + 2] == board[i - 3][j + 3]      &&
+                board[i - 4][j + 4] == 0                        &&
+                board[i - 5][j + 2] == 0
+                )
+            {   // 211100
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                        &&  
+                board[i - 1][j + 1] != 0                        &&  
+                board[i - 1][j + 1] == board[i - 3][j + 3]      &&  
+                board[i - 2][j + 2] == 0                        &&
+                board[i - 3][j + 3] == board[i - 4][j + 4]      &&
+                board[i - 5][j + 5] == (-1)*board[i - 1][j + 1]
+                )
+            {   // 010112
+                if(board[i - 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                        &&  
+                board[i - 1][j + 1] != 0                        &&  
+                board[i - 1][j + 1] == board[i - 2][j + 2]      &&  
+                board[i - 2][j + 2] == board[i - 4][j + 4]      &&
+                board[i - 3][j + 3] == 0                        &&
+                board[i - 5][j + 5] == (-1)*board[i - 2][j + 2]
+                )
+            {   // 011012
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == (-1)*board[i - 1][j + 1] &&  
+                board[i - 1][j + 1] != 0                        &&  
+                board[i - 1][j + 1] == board[i - 3][j + 3]      &&  
+                board[i - 2][j + 2] == 0                        &&
+                board[i - 3][j + 3] == board[i - 4][j + 4]      &&
+                board[i - 5][j + 5] == 0
+                )
+            {   // 210110
+                if(board[i - 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == (-1)*board[i - 2][j + 2] &&  
+                board[i - 1][j + 1] != 0                        &&  
+                board[i - 1][j + 1] == board[i - 2][j + 2]      &&  
+                board[i - 2][j + 2] == board[i - 4][j + 4]      &&
+                board[i - 3][j + 3] == 0                        &&
+                board[i - 5][j + 5] == 0
+                )
+            {   // 211010
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
+    for(int i = 4; i < 15; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i    ][j    ] == board[i - 3][j + 3]  &&  
+                board[i    ][j    ] != 0                    &&  
+                board[i - 1][j + 1] == 0                    &&
+                board[i - 2][j + 2] == 0                    &&  
+                board[i - 3][j + 3] == board[i - 4][j + 4]
+                )
+            {   // 10011
+                if(board[i    ][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j    ] == board[i - 2][j + 2]  &&  
+                board[i    ][j    ] != 0                    &&  
+                board[i - 1][j + 1] == 0                    &&
+                board[i - 2][j + 2] == board[i - 4][j + 4]  &&  
+                board[i - 3][j + 3] == 0      
+                )
+            {   // 10101
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == board[i - 1][j + 1]  &&  
+                board[i - 1][j + 1] != 0                    &&
+                board[i - 1][j + 1] == board[i - 4][j + 4]  &&
+                board[i - 2][j + 2] == 0                    &&  
+                board[i - 3][j + 3] == 0      
+                )
+            {   // 11001
                 if(board[i - 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
             }
@@ -595,13 +1071,50 @@ typeCount GoodTwo(int** board)
     {
         for(int j = 0; j < 15; j++)
         {
-            if( board[i    ][j] == 0  &&  
-                board[i + 5][j] == 0  &&
-                board[i + 1][j] == board[i + 2][j]  &&  
-                board[i + 2][j] == board[i + 3][j]  &&
-                board[i + 3][j] == board[i + 4][j]  &&
+            if( board[i    ][j] == 0                &&  
+                board[i + 5][j] == 0                &&
+                board[i + 1][j] != 0                &&  
+                board[i + 1][j] == board[i + 4][j]  &&  
+                board[i + 2][j] == 0                &&
+                board[i + 3][j] == 0  
                 )
-            {
+            {   // 010010
+                if(board[i + 1][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 11; i++)
+    {
+        for(int j = 0; j < 15; j++)
+        {
+            if( board[i    ][j] == 0                &&  
+                board[i + 1][j] != 0                &&  
+                board[i + 1][j] == board[i + 2][j]  &&  
+                board[i + 4][j] == 0                &&
+                board[i + 3][j] == 0  
+                )
+            {   // 01100
+                if(board[i + 1][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == 0                &&  
+                board[i + 1][j] == 0                &&  
+                board[i + 2][j] != 0                &&
+                board[i + 2][j] == board[i + 3][j]  &&
+                board[i + 4][j] == 0  
+                )
+            {   // 00110
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == 0                &&  
+                board[i + 1][j] != 0                &&  
+                board[i + 1][j] == board[i + 3][j]  &&  
+                board[i + 2][j] == 0                &&
+                board[i + 4][j] == 0  
+                )
+            {   // 01010
                 if(board[i + 1][j] == 1)    result.maxC++;
                 else                        result.minC++;
             }
@@ -612,13 +1125,50 @@ typeCount GoodTwo(int** board)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i][j    ] == 0  &&  
-                board[i][j + 5] == 0  &&
-                board[i][j + 1] == board[i][j + 2]  &&  
-                board[i][j + 2] == board[i][j + 3]  &&
-                board[i][j + 3] == board[i][j + 4]  &&
+            if( board[i][j    ] == 0                &&  
+                board[i][j + 5] == 0                &&
+                board[i][j + 1] != 0                &&  
+                board[i][j + 1] == board[i][j + 4]  &&  
+                board[i][j + 2] == 0                &&
+                board[i][j + 3] == 0  
                 )
-            {
+            {   // 010010
+                if(board[i][j + 1] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 15; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i][j    ] == 0                &&  
+                board[i][j + 1] != 0                &&  
+                board[i][j + 1] == board[i][j + 2]  &&  
+                board[i][j + 4] == 0                &&
+                board[i][j + 3] == 0  
+                )
+            {   // 01100
+                if(board[i][j + 1] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == 0                &&  
+                board[i][j + 1] == 0                &&  
+                board[i][j + 2] != 0                &&
+                board[i][j + 2] == board[i][j + 3]  &&
+                board[i][j + 4] == 0  
+                )
+            {   // 00110
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == 0                &&  
+                board[i][j + 1] != 0                &&  
+                board[i][j + 1] == board[i][j + 3]  &&  
+                board[i][j + 2] == 0                &&
+                board[i][j + 4] == 0  
+                )
+            {   // 01010
                 if(board[i][j + 1] == 1)    result.maxC++;
                 else                        result.minC++;
             }
@@ -629,13 +1179,50 @@ typeCount GoodTwo(int** board)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
-                board[i + 5][j + 5] == 0  &&
-                board[i + 1][j + 1] == board[i + 2][j + 2]  &&  
-                board[i + 2][j + 2] == board[i + 3][j + 3]  &&
-                board[i + 3][j + 3] == board[i + 4][j + 4]  &&
+            if( board[i    ][j    ] == 0                    &&  
+                board[i + 5][j + 5] == 0                    &&
+                board[i + 1][j + 1] != 0                    &&  
+                board[i + 1][j + 1] == board[i + 4][j + 4]  &&  
+                board[i + 2][j + 2] == 0                    &&
+                board[i + 3][j + 3] == 0  
                 )
-            {
+            {   // 010010
+                if(board[i + 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 11; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] != 0                    &&  
+                board[i + 1][j + 1] == board[i + 2][j + 2]  &&  
+                board[i + 4][j + 4] == 0                    &&
+                board[i + 3][j + 3] == 0  
+                )
+            {   // 01100
+                if(board[i + 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] == 0                    &&  
+                board[i + 2][j + 2] != 0                    &&
+                board[i + 2][j + 2] == board[i + 3][j + 3]  &&
+                board[i + 4][j + 4] == 0  
+                )
+            {   // 00110
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                    &&  
+                board[i + 1][j + 1] != 0                    &&  
+                board[i + 1][j + 1] == board[i + 3][j + 3]  &&  
+                board[i + 2][j + 2] == 0                    &&
+                board[i + 4][j + 4] == 0  
+                )
+            {   // 01010
                 if(board[i + 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
             }
@@ -646,13 +1233,50 @@ typeCount GoodTwo(int** board)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
-                board[i - 5][j + 5] == 0  &&
-                board[i - 1][j + 1] == board[i - 2][j + 2]  &&  
-                board[i - 2][j + 2] == board[i - 3][j + 3]  &&
-                board[i - 3][j + 3] == board[i - 4][j + 4]  &&
+            if( board[i    ][j    ] == 0                    &&  
+                board[i - 5][j + 5] == 0                    &&
+                board[i - 1][j + 1] != 0                    &&  
+                board[i - 1][j + 1] == board[i - 4][j + 4]  &&  
+                board[i - 2][j + 2] == 0                    &&
+                board[i - 3][j + 3] == 0  
                 )
-            {
+            {   // 010010
+                if(board[i - 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
+    for(int i = 4; i < 15; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] != 0                    &&  
+                board[i - 1][j + 1] == board[i - 2][j + 2]  &&  
+                board[i - 4][j + 4] == 0                    &&
+                board[i - 3][j + 3] == 0  
+                )
+            {   // 01100
+                if(board[i - 1][j + 1] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] == 0                    &&  
+                board[i - 2][j + 2] != 0                    &&
+                board[i - 2][j + 2] == board[i - 3][j + 3]  &&
+                board[i - 4][j + 4] == 0  
+                )
+            {   // 00110
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                    &&  
+                board[i - 1][j + 1] != 0                    &&  
+                board[i - 1][j + 1] == board[i - 3][j + 3]  &&  
+                board[i - 2][j + 2] == 0                    &&
+                board[i - 4][j + 4] == 0  
+                )
+            {   // 01010
                 if(board[i - 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
             }
@@ -668,70 +1292,346 @@ typeCount LimitedTwo(int** board)
     typeCount result;
     result.maxC = result.minC = 0;
     // UP-DOWN----------------------------------------------------
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 15; j++)
+        {
+            if( board[i    ][j] == board[i + 2][j]*(-1) &&
+                board[i + 6][j] == board[i + 2][j]*(-1) &&  
+                board[i + 5][j] == 0                    &&
+                board[i + 1][j] == 0                    &&  
+                board[i + 2][j] != 0                    &&
+                board[i + 2][j] == board[i + 3][j]      &&
+                board[i + 4][j] == 0 
+                )
+            {   // 2011002
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == board[i + 2][j]*(-1) &&
+                board[i + 6][j] == board[i + 2][j]*(-1) &&  
+                board[i + 5][j] == 0                    &&
+                board[i + 1][j] == 0                    &&  
+                board[i + 2][j] != 0                    &&
+                board[i + 2][j] == board[i + 4][j]      &&
+                board[i + 3][j] == 0 
+                )
+            {   // 2010102
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
     for(int i = 0; i < 10; i++)
     {
         for(int j = 0; j < 15; j++)
         {
-            if( board[i    ][j] == 0  &&  
-                board[i + 5][j] == 0  &&
-                board[i + 1][j] == board[i + 2][j]  &&  
-                board[i + 2][j] == board[i + 3][j]  &&
-                board[i + 3][j] == board[i + 4][j]  &&
+            if( board[i    ][j] == 0                    && 
+                board[i + 5][j] == board[i + 3][j]*(-1) &&
+                board[i + 1][j] == 0                    &&  
+                board[i + 2][j] == 0                    &&
+                board[i + 4][j] != 0                    &&
+                board[i + 4][j] == board[i + 3][j]
                 )
-            {
+            {   // 000112
+                if(board[i + 3][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == board[i + 2][j]*(-1) &&
+                board[i + 5][j] == 0                    &&
+                board[i + 4][j] == 0                    &&  
+                board[i + 2][j] != 0                    &&
+                board[i + 2][j] == board[i + 1][j]      &&
+                board[i + 3][j] == 0 
+                )
+            {   // 211000
+                if(board[i + 2][j] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i    ][j] == 0                    &&
+                board[i + 5][j] == board[i + 4][j]*(-1) &&
+                board[i + 1][j] != 0                    &&  
+                board[i + 1][j] == board[i + 4][j]      &&  
+                board[i + 2][j] == 0                    &&
+                board[i + 3][j] == 0 
+                )
+            {   // 010012
                 if(board[i + 1][j] == 1)    result.maxC++;
                 else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 11; i++)
+    {
+        for(int j = 0; j < 15; j++)
+        {
+            if( board[i    ][j] == board[i + 4][j]  &&  
+                board[i    ][j] != 0                &&  
+                board[i + 1][j] == 0                &&  
+                board[i + 2][j] == 0                &&
+                board[i + 3][j] == 0 
+                )
+            {   // 10001
+                if(board[i][j] == 1)    result.maxC++;
+                else                    result.minC++;
             }
         }
     }
     // RIGHT-LEFT----------------------------------------------------
     for(int i = 0; i < 15; i++)
     {
+        for(int j = 0; j < 9; j++)
+        {
+            if( board[i][j    ] == board[i][j + 2]*(-1) &&
+                board[i][j + 6] == board[i][j + 2]*(-1) &&  
+                board[i][j + 5] == 0                    &&
+                board[i][j + 1] == 0                    &&  
+                board[i][j + 2] != 0                    &&
+                board[i][j + 2] == board[i][j + 3]      &&
+                board[i][j + 4] == 0  
+                )
+            {   // 2011002
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == board[i][j + 2]*(-1) &&
+                board[i][j + 6] == board[i][j + 2]*(-1) &&  
+                board[i][j + 5] == 0                    &&
+                board[i][j + 1] == 0                    &&  
+                board[i][j + 2] != 0                    &&
+                board[i][j + 2] == board[i][j + 4]      &&
+                board[i][j + 3] == 0 
+                )
+            {   // 2010102
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+        }
+    }
+    for(int i = 0; i < 15; i++)
+    {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i][j    ] == 0  &&  
-                board[i][j + 5] == 0  &&
-                board[i][j + 1] == board[i][j + 2]  &&  
-                board[i][j + 2] == board[i][j + 3]  &&
-                board[i][j + 3] == board[i][j + 4]  &&
+            if( board[i][j    ] == 0                    && 
+                board[i][j + 5] == board[i][j + 3]*(-1) &&
+                board[i][j + 1] == 0                    &&  
+                board[i][j + 2] == 0                    &&
+                board[i][j + 4] != 0                    &&
+                board[i][j + 4] == board[i][j + 3]  
                 )
-            {
+            {   // 000112
+                if(board[i][j + 3] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == board[i][j + 2]*(-1) &&
+                board[i][j + 5] == 0                    &&
+                board[i][j + 4] == 0                    &&  
+                board[i][j + 2] != 0                    &&
+                board[i][j + 2] == board[i][j + 1]      &&
+                board[i][j + 3] == 0  
+                )
+            {   // 211000
+                if(board[i][j + 2] == 1)    result.maxC++;
+                else                        result.minC++;
+            }
+            if( board[i][j    ] == 0                    &&
+                board[i][j + 5] == board[i][j + 4]*(-1) &&
+                board[i][j + 1] != 0                    &&  
+                board[i][j + 1] == board[i][j + 4]      &&  
+                board[i][j + 2] == 0  &&
+                board[i][j + 3] == 0  
+                )
+            {   // 010012
                 if(board[i][j + 1] == 1)    result.maxC++;
                 else                        result.minC++;
             }
         }
     }
+    for(int i = 0; i < 15; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i][j    ] != 0                &&  
+                board[i][j    ] == board[i][j + 4]  &&  
+                board[i][j + 1] == 0                &&  
+                board[i][j + 2] == 0                &&
+                board[i][j + 3] == 0  
+                )
+            {   // 10001
+                if(board[i][j] == 1)    result.maxC++;
+                else                    result.minC++;
+            }
+        }
+    }
     // UL-DR----------------------------------------------------
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if( board[i    ][j    ] == board[i + 2][j + 2]*(-1) &&
+                board[i + 6][j + 6] == board[i + 2][j + 2]*(-1) &&  
+                board[i + 5][j + 5] == 0                        &&
+                board[i + 1][j + 1] == 0                        &&  
+                board[i + 2][j + 2] != 0                        &&
+                board[i + 2][j + 2] == board[i + 3][j + 3]      &&
+                board[i + 4][j + 4] == 0  
+                )
+            {   // 2011002
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == board[i + 2][j + 2]*(-1) &&
+                board[i + 6][j + 6] == board[i + 2][j + 2]*(-1) &&  
+                board[i + 5][j + 5] == 0                        &&
+                board[i + 1][j + 1] == 0                        &&  
+                board[i + 2][j + 2] != 0                        &&
+                board[i + 2][j + 2] == board[i + 4][j + 4]      &&
+                board[i + 3][j + 3] == 0  
+                )
+            {   // 2010102
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
     for(int i = 0; i < 10; i++)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
-                board[i + 5][j + 5] == 0  &&
-                board[i + 1][j + 1] == board[i + 2][j + 2]  &&  
-                board[i + 2][j + 2] == board[i + 3][j + 3]  &&
-                board[i + 3][j + 3] == board[i + 4][j + 4]  &&
+            if( board[i    ][j    ] == 0                        && 
+                board[i + 5][j + 5] == board[i + 3][j + 3]*(-1) &&
+                board[i + 1][j + 1] == 0                        &&  
+                board[i + 2][j + 2] == 0                        &&
+                board[i + 4][j + 4] != 0                        &&
+                board[i + 4][j + 4] == board[i + 3][j + 3]  
                 )
-            {
+            {   // 000112
+                if(board[i + 3][j + 3] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == board[i + 2][j + 2]*(-1) &&
+                board[i + 5][j + 5] == 0                        &&
+                board[i + 4][j + 4] == 0                        &&  
+                board[i + 2][j + 2] != 0                        &&
+                board[i + 2][j + 2] == board[i + 1][j + 1]      &&
+                board[i + 3][j + 3] == 0  
+                )
+            {   // 211000
+                if(board[i + 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                        &&
+                board[i + 5][j + 5] == board[i + 4][j + 4]*(-1) &&
+                board[i + 1][j + 1] != 0                        &&  
+                board[i + 1][j + 1] == board[i + 4][j + 4]      &&  
+                board[i + 2][j + 2] == 0                        &&
+                board[i + 3][j + 3] == 0  
+                )
+            {   // 010012
                 if(board[i + 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
             }
         }
     }
+    for(int i = 0; i < 11; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i    ][j    ] == board[i + 4][j + 4]  &&  
+                board[i    ][j    ] != 0                    &&  
+                board[i + 1][j + 1] == 0                    &&  
+                board[i + 2][j + 2] == 0                    &&
+                board[i + 3][j + 3] == 0  
+                )
+            {   // 10001
+                if(board[i][j] == 1)    result.maxC++;
+                else                    result.minC++;
+            }
+        }
+    }
     // UR-DL----------------------------------------------------
+    for(int i = 6; i < 15; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if( board[i    ][j    ] == board[i - 2][j + 2]*(-1) &&
+                board[i - 6][j + 6] == board[i - 2][j + 2]*(-1) &&  
+                board[i - 5][j + 5] == 0                        &&
+                board[i - 1][j + 1] == 0                        &&  
+                board[i - 2][j + 2] != 0                        &&
+                board[i - 2][j + 2] == board[i - 3][j + 3]      &&
+                board[i - 4][j + 4] == 0  
+                )
+            {   // 2011002
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == board[i - 2][j + 2]*(-1) &&
+                board[i - 6][j + 6] == board[i - 2][j + 2]*(-1) &&  
+                board[i - 5][j + 5] == 0                        &&
+                board[i - 1][j + 1] == 0                        &&  
+                board[i - 2][j + 2] != 0                        &&
+                board[i - 2][j + 2] == board[i - 4][j + 4]      &&
+                board[i - 3][j + 3] == 0  
+                )
+            {   // 2010102
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+        }
+    }
     for(int i = 5; i < 15; i++)
     {
         for(int j = 0; j < 10; j++)
         {
-            if( board[i    ][j    ] == 0  &&  
-                board[i - 5][j + 5] == 0  &&
-                board[i - 1][j + 1] == board[i - 2][j + 2]  &&  
-                board[i - 2][j + 2] == board[i - 3][j + 3]  &&
-                board[i - 3][j + 3] == board[i - 4][j + 4]  &&
+            if( board[i    ][j    ] == 0                        && 
+                board[i - 5][j + 5] == board[i - 3][j + 3]*(-1) &&
+                board[i - 1][j + 1] == 0                        &&  
+                board[i - 2][j + 2] == 0                        &&
+                board[i - 4][j + 4] != 0                        &&
+                board[i - 4][j + 4] == board[i - 3][j + 3]  
                 )
-            {
+            {   // 000112
+                if(board[i - 3][j + 3] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == board[i - 2][j + 2]*(-1) &&
+                board[i - 5][j + 5] == 0                        &&
+                board[i - 4][j + 4] == 0                        &&  
+                board[i - 2][j + 2] != 0                        &&
+                board[i - 2][j + 2] == board[i - 1][j + 1]      &&
+                board[i - 3][j + 3] == 0  
+                )
+            {   // 211000
+                if(board[i - 2][j + 2] == 1)    result.maxC++;
+                else                            result.minC++;
+            }
+            if( board[i    ][j    ] == 0                        &&
+                board[i - 5][j + 5] == board[i - 4][j + 4]*(-1) &&
+                board[i - 1][j + 1] != 0                        &&  
+                board[i - 1][j + 1] == board[i - 4][j + 4]      &&  
+                board[i - 2][j + 2] == 0                        &&
+                board[i - 3][j + 3] == 0  
+                )
+            {   // 010012
                 if(board[i - 1][j + 1] == 1)    result.maxC++;
                 else                            result.minC++;
+            }
+        }
+    }
+    for(int i = 4; i < 15; i++)
+    {
+        for(int j = 0; j < 11; j++)
+        {
+            if( board[i    ][j    ] != 0                    &&  
+                board[i    ][j    ] == board[i - 4][j + 4]  &&  
+                board[i - 1][j + 1] == 0                    &&  
+                board[i - 2][j + 2] == 0                    &&
+                board[i - 3][j + 3] == 0  
+                )
+            {   // 10001
+                if(board[i][j] == 1)    result.maxC++;
+                else                    result.minC++;
             }
         }
     }

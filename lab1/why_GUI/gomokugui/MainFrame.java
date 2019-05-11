@@ -149,17 +149,17 @@ public class MainFrame extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 153, 255));
         setPreferredSize(new java.awt.Dimension(1200, 1000));
 
-        jLabel1.setFont(new java.awt.Font("楷体", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("HYNanGongJ", 1, 48)); // NOI18N
         jLabel1.setText("AI五子棋");
 
-        jLabel2.setFont(new java.awt.Font("楷体", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("HYNanGongJ", 1, 36)); // NOI18N
         jLabel2.setText("AI");
 
         jLabel3.setBackground(new java.awt.Color(204, 255, 204));
-        jLabel3.setFont(new java.awt.Font("楷体", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("HYNanGongJ", 1, 36)); // NOI18N
         jLabel3.setText("Player");
 
-        jButton1.setFont(new java.awt.Font("楷体", 1, 48)); // NOI18N
+        jButton1.setFont(new java.awt.Font("HYNanGongJ", 1, 48)); // NOI18N
         jButton1.setText("开始游戏");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("楷体", 1, 48)); // NOI18N
+        jButton2.setFont(new java.awt.Font("HYNanGongJ", 1, 48)); // NOI18N
         jButton2.setText("结束游戏");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("楷体", 1, 48)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("HYNanGongJ", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("你赢了！");
 
@@ -235,7 +235,7 @@ public class MainFrame extends javax.swing.JFrame {
             playerTurn=false;
             jButton1.setText("重新开始");
             jLabel4.setVisible(false);
-            process=Runtime.getRuntime().exec("cmd.exe /c AI");    
+            process=Runtime.getRuntime().exec("../AlphaBetaGame");    
             OutputStream pOutputStream = process.getOutputStream();
             outputWriter = new PrintWriter(pOutputStream, true);   
             listenerThread=new ProcessListener(process);
