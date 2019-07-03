@@ -20,13 +20,15 @@ class SVMClassifier:
             raise TypeError("trainset should have same size with trainlabel.")
         if(testset.shape[0] != testlabel.shape[0]):
             raise TypeError("testset should have same size with testlabel.")
-        self.trainX     = trainset
+        self.trainX     = np.mat(trainset)
+        # self.trainY     = np.mat(trainlabel)
         self.trainY     = trainlabel
-        self.testX      = testset
+        self.testX      = np.mat(testset)
         self.testY      = testlabel
         self.sigma      = sigma
         self.C          = C
-        self.alphas     = np.mat(np.zeros((self.trainX.shape[0],1)))
+        # self.alphas     = np.mat(np.zeros((self.trainX.shape[0],1)))
+        self.alphas     = np.zeros(self.trainX.shape[0])
         self.predictY   = []
         self.kernelM    = self.calculateKernelM()
         self.b          = 0
@@ -57,6 +59,7 @@ class SVMClassifier:
         kernelVal = np.mat(np.zeros((self.trainX.shape[0], 1)))
         if self.sigma == 0 :
             kernelVal = self.trainX * self.trainX[i, :].T
+            # print(kernelVal)
         else :
             for j in range(self.trainX.shape[0]):
                 diff = self.trainX[j, :] - self.trainX[i, :]
@@ -116,11 +119,11 @@ class SVMClassifier:
             alpha_j_cache = self.alphas[alpha_j].copy()
             # step 2: calculate the boundary L and H for alpha j
             if self.trainY[alpha_i] != self.trainY[alpha_j] :
-                L = np.max(0,      0      + self.alphas[alpha_j] - self.alphas[alpha_i])
-                H = np.min(self.C, self.C + self.alphas[alpha_j] - self.alphas[alpha_i])
+                L = max(0,      0      + self.alphas[alpha_j] - self.alphas[alpha_i])
+                H = min(self.C, self.C + self.alphas[alpha_j] - self.alphas[alpha_i])
             else :
-                L = np.max(0, self.alphas[alpha_j] + self.alphas[alpha_i] - self.C)
-                H = np.min(self.C, self.alphas[alpha_j] + self.alphas[alpha_i])
+                L = max(0, self.alphas[alpha_j] + self.alphas[alpha_i] - self.C)
+                H = min(self.C, self.alphas[alpha_j] + self.alphas[alpha_i])
             if L == H :
                 return 0
             # step 3: calculate eta (the similarity of sample i and j)
@@ -130,13 +133,13 @@ class SVMClassifier:
             # step 4: update alpha j
             self.alphas[alpha_j] -= self.trainY[alpha_j] * (error_i - error_j) / eta
             # step 5: clip alpha j
-            self.alphas[alpha_j] = np.max(L, np.min(self.alphas[alpha_j], H))
+            self.alphas[alpha_j] = max(L, min(self.alphas[alpha_j], H))
             # step 6: if alpha j not moving enough, just return
             if abs(self.alphas[alpha_j] - alpha_j_cache) < 0.00001:
                 self.errorCache[alpha_j] = [1, self.calculateError(alpha_j)]
                 return 0
             # step 7: update alpha i after optimizing aipha j
-            self.alphas[alpha_i] += self.trainY * self.trainY[alpha_j] * (alpha_j_cache - self.alphas[alpha_j])
+            self.alphas[alpha_i] += self.trainY[alpha_i] * self.trainY[alpha_j] * (alpha_j_cache - self.alphas[alpha_j])
             # step 8: update threshold b
             b1 = self.b - error_i - self.trainY[alpha_i] * (self.alphas[alpha_i] - alpha_i_cache) * self.kernelM[alpha_i, alpha_i] \
                                   - self.trainY[alpha_j] * (self.alphas[alpha_j] - alpha_j_cache) * self.kernelM[alpha_i, alpha_j]
@@ -172,7 +175,7 @@ class SVMClassifier:
                 iterCount += 1
             else:
                 # update alphas over examples where alpha is not 0 & not C (not on boundary)
-                nonBoundAlphasList = np.nonzero((self.alphas.A > 0) * (self.alphas.A < self.C))[0]
+                nonBoundAlphasList = np.nonzero((self.alphas > 0) * (self.alphas < self.C))[0]
                 for i in nonBoundAlphasList:
                     alphaPairsChanged += self.innerLoop(i)
                 print("iter: %d non boundary, alpha pairs changed: %d"%(iterCount,alphaPairsChanged))
@@ -188,7 +191,7 @@ class SVMClassifier:
         '''
         temp_testX = np.mat(self.testX)
         temp_testY = np.mat(self.testY)
-        supportVectorsIndex = np.nonzero(self.alphas.A > 0)[0]
+        supportVectorsIndex = np.nonzero(self.alphas > 0)[0]
         supportVectors      = self.trainX[supportVectorsIndex]
         supportVectorsLabel = self.trainY[supportVectorsIndex]
         supportVectorsAlpha = self.alphas[supportVectorsIndex]
@@ -201,9 +204,9 @@ class SVMClassifier:
                 for j in range(supportVectors.shape[0]):
                     diff = supportVectors[j, :] - self.testX[i, :]
                     kernelVal[j] = np.exp(diff * diff.T / (-1.0 * self.sigma ** 2))
-            predict = kernelVal.T * np.multiply(supportVectorsLabel, supportVectorsAlpha) + self.b
+            predict = np.multiply(supportVectorsLabel, supportVectorsAlpha) * kernelVal + self.b
             # self.predictY.append(np.sign(predict))
-            self.predictY.append(predict)
+            self.predictY.append(float(predict))
 #------------------------------------------------------------------------------------
 def computeResult(predictY, targetY):
     '''
@@ -222,7 +225,7 @@ def computeResult(predictY, targetY):
     TN = TP.copy()
     FN = TP.copy()
     for key in TP :
-        for i in range(predictY.shape[0]) :
+        for i in range(targetY.shape[0]) :
             if targetY[i] == key and predictY[i] == key :
                 TP[key] = TP[key] + 1
             if targetY[i] == key and predictY[i] != key :
@@ -254,24 +257,27 @@ def computeResult(predictY, targetY):
 #==========================================================================================================
 # 实验要求接口包装
 #==========================================================================================================
-def multiClassSVM(trainset, trainlabel, testset, testlabel):
+def multiClassSVM(trainset, trainlabel, testset, testlabel, sigma = 0, C = 1):
     '''
 
     '''
-    svmKinds = DataFrame(testlabel)[0].unique()
+    # svmKinds = DataFrame(testlabel)[0].unique()
+    svmKinds = trainlabel.unique()
     probList = [[] for label in testlabel]
     for kind in svmKinds:
-        temptestY  = testlabel  == kind
-        temptestY.replace([True,False],[1,-1])
+        print(kind)
+        temptestY  = testlabel == kind
+        temptestY  = temptestY.replace([True,False],[1,-1])
         temptrainY = trainlabel == kind
-        temptrainY.replace([True,False],[1,-1])
+        temptrainY = temptrainY.replace([True,False],[1,-1])
 
-        thisKindPredictY = softSVM(trainset, temptrainY, testset, temptestY, 0, 1)
+        thisKindPredictY = softSVM(trainset, temptrainY.values, testset, temptestY.values, sigma, C)
 
         for i in range(len(testlabel)) :
             probList[i].append(thisKindPredictY[i])
+
     allpredict = []
-    for i in range(len(testlabel)) :
+    for i in range(testlabel.shape[0]) :
         allpredict.append(svmKinds[probList[i].index(max(probList[i]))])
     
     result = computeResult(allpredict,testlabel)
@@ -316,15 +322,19 @@ testset['WKR_BKR'] = abs(testset['WKR'] - testset['BKR'])
 testset['WRR_BKR'] = abs(testset['WRR'] - testset['BKR'])
 testset['ATTRACK'] = testset['WRC_BKC'] + testset['WRR_BKR']
 
-resultFile = open("KNNresult.txt",'w')
+resultFile = open("SVMresult.txt",'w')
 
-result, ypred = multiClassSVM(  trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
-                                trainset['winstep'].values,
-                                testset[[  'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
-                                testset[ 'winstep'].values
-                                )
-resultFile.write("Accuracy = " + str(result['Accuracy']) + "\t")
-resultFile.write("Macro_F1 = " + str(result['Macro_F1']) + "\t")
-resultFile.write("Micro_F1 = " + str(result['Micro_F1']) + "\n")
+trainset = trainset.sample(n = 800)
+for i in range(4):
+    result, ypred = multiClassSVM(  trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
+                                    trainset['winstep'],
+                                    testset[[  'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
+                                    testset[ 'winstep'],
+                                    sigma = i
+                                    )
+    resultFile.write("sigma = " + str(i) + "\t")
+    resultFile.write("Accuracy = " + str(result['Accuracy']) + "\t")
+    resultFile.write("Macro_F1 = " + str(result['Macro_F1']) + "\t")
+    resultFile.write("Micro_F1 = " + str(result['Micro_F1']) + "\n")
 
 resultFile.close()
