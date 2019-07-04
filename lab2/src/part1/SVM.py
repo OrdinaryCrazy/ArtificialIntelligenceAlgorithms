@@ -324,17 +324,36 @@ testset['ATTRACK'] = testset['WRC_BKC'] + testset['WRR_BKR']
 
 resultFile = open("SVMresult.txt",'w')
 
+# trainset = trainset.sample(n = 800)
+# for i in range(4):
+#     result, ypred = multiClassSVM(  trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
+#                                     trainset['winstep'],
+#                                     testset[[  'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
+#                                     testset[ 'winstep'],
+#                                     sigma = i
+#                                     )
+#     resultFile.write("sigma = " + str(i) + "\t")
+#     resultFile.write("Accuracy = " + str(result['Accuracy']) + "\t")
+#     resultFile.write("Macro_F1 = " + str(result['Macro_F1']) + "\t")
+#     resultFile.write("Micro_F1 = " + str(result['Micro_F1']) + "\n")
+
+# resultFile.close()
+
+resultFile = open("SVMresultS.txt",'w')
+
 trainset = trainset.sample(n = 800)
-for i in range(4):
-    result, ypred = multiClassSVM(  trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
-                                    trainset['winstep'],
-                                    testset[[  'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
-                                    testset[ 'winstep'],
-                                    sigma = i
-                                    )
-    resultFile.write("sigma = " + str(i) + "\t")
-    resultFile.write("Accuracy = " + str(result['Accuracy']) + "\t")
-    resultFile.write("Macro_F1 = " + str(result['Macro_F1']) + "\t")
-    resultFile.write("Micro_F1 = " + str(result['Micro_F1']) + "\n")
+result, ypred = multiClassSVM(  trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
+                                trainset['winstep'],
+                                testset[[  'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']].values,
+                                testset[ 'winstep'],
+                                sigma = 1.6,
+                                C = 10
+                                )
+resultFile.write("sigma = " + str(1.6) + "\t")
+resultFile.write("C = " + str(10) + "\t")
+resultFile.write("Accuracy = " + str(result['Accuracy']) + "\t")
+resultFile.write("Macro_F1 = " + str(result['Macro_F1']) + "\t")
+resultFile.write("Micro_F1 = " + str(result['Micro_F1']) + "\n")
 
 resultFile.close()
+
