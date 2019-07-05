@@ -322,7 +322,7 @@ testset['WKR_BKR'] = abs(testset['WKR'] - testset['BKR'])
 testset['WRR_BKR'] = abs(testset['WRR'] - testset['BKR'])
 testset['ATTRACK'] = testset['WRC_BKC'] + testset['WRR_BKR']
 
-resultFile = open("SVMresult.txt",'w')
+# resultFile = open("SVMresult.txt",'w')
 
 # trainset = trainset.sample(n = 800)
 # for i in range(4):

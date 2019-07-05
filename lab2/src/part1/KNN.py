@@ -164,11 +164,11 @@ for i in range(1,12):
                                                 # 'ATTRACK'
                                                 # ]]),
                             np.array(trainset['winstep']),
-                            np.array(trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']]),
+                            np.array(testset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR']]),
                             # np.array(trainset[[ 'WKC', 'WKR', 'WRC', 'WRR', 'BKC', 'BKR',
                                                 # 'WKC_WRC','WKC_BKC','WRC_BKC','WKR_WRR','WKR_BKR','WRR_BKR',
                                                 # 'ATTRACK']]),
-                            np.array(trainset['winstep']),
+                            np.array(testset['winstep']),
                             k = i
                             )
     knnc.predict()

@@ -111,9 +111,9 @@ plt.savefig("./PCA.png")
 # 选用 Species 聚类，原来是10个类
 resultFile = open("Kmeans_PCA_result.txt",'a')
 for t in range(8,10) :
+    newData = PCA(inputData.drop(columns=['Family','Genus','Species','RecordID']).values,float(t)/10.0)
     for k in range(1,21):
     # for k in range(8,13):
-        newData = PCA(inputData.drop(columns=['Family','Genus','Species','RecordID']).values,float(t)/10.0)
         purity, RI = KMeans(newData, inputData['Species'].values, k)
         resultFile.write("k = "         + str(k)                + "\t")
         resultFile.write("threshold = " + str(float(t)/10.0)    + "\t")
