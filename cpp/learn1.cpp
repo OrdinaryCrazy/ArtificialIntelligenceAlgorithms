@@ -6,12 +6,38 @@
 // ======================================================================
 #include <iostream> /* 类库 */
 
+#include <climits>
+/* climits 头文件定义了诸如 INT_MAX, SHRT_MAX 之类与系统有关的符号常量
+ * 来表示对于类型的限制
+ */
+#include <cfloat>
+/* cfloat 头文件定义了系统对于浮点数的限制 */
+void backward(void)
+{
+    using namespace std;
+    cout << "Enter your agent code:_____\b\b\b\b\b";
+    long code;
+    cin >> code;
+    cout << "\aYou Entered: " << code << endl;
+}
+
 int main(void)
 {
     /* 名称空间：代码的封装单元 */
     using namespace std;
     /* 流与插入运算符(运算符重载) */
     cout << "Learning C++" << endl;
+
+    cout << "Size Of INT: " << sizeof(int) << endl;
+
+    /* 修改输出流基数 */
+    cout << hex;
+    cout << 0x87 << endl;
+    cout << dec;
+    cout << 0x87 << endl;
+
+    backward();
+
     return 0;
 }
 /* 
