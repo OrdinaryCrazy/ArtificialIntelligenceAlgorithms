@@ -29,14 +29,25 @@ int main(void)
     cout << "Learning C++" << endl;
 
     cout << "Size Of INT: " << sizeof(int) << endl;
-
+    //----------------------------------------------
     /* 修改输出流基数 */
-    cout << hex;
-    cout << 0x87 << endl;
-    cout << dec;
-    cout << 0x87 << endl;
-
-    backward();
+    // cout << hex;
+    // cout << 0x87 << endl;
+    // cout << dec;
+    // cout << 0x87 << endl;
+    //----------------------------------------------
+    /* 转义字符 */
+    // backward();
+    //----------------------------------------------
+    /* 类型转换 */
+    // int sta = 5;
+    // cout << typeid(sta).name() << endl;
+    // cout << typeid( static_cast<long> (sta) ).name() << endl;
+    //----------------------------------------------
+    /* String 类 */
+    string str = "hello";
+    cout << str << endl;
+    cout << str.size() << endl;
 
     return 0;
 }
