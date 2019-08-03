@@ -1,2 +1,2 @@
-model_checkpoint_path: "test_save.ckpt"
-all_model_checkpoint_paths: "test_save.ckpt"
+model_checkpoint_path: "mnist_tf_test.ckpt"
+all_model_checkpoint_paths: "mnist_tf_test.ckpt"
